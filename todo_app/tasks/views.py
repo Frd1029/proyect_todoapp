@@ -11,4 +11,4 @@ def tasks_list(request):
 def users_list(request):
     users = User.objects.all()
     context = {'users': users}
-    return render(request, 'tasks/index.html', context)
+    return render(request, 'users/index.html', context)
