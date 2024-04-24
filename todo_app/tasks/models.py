@@ -6,3 +6,8 @@ class Task(models.Model):
     description = models.TextField()
     status = models.CharField(max_length=20)
     deadline = models.DateField()
+    
+class User(models.Model):
+    name = models.CharField(max_length=20)
+    email = models.EmailField()
+    document = models.CharField(max_length=30)
