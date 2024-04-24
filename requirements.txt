@@ -1,10 +1,5 @@
 asgiref==3.8.1
 black==24.4.0
-Django==5.0.4
-mypy-extensions==1.0.0
-sqlparse==0.4.4
-tzdata==2024.1asgiref==3.8.1
-black==24.4.0
 click==8.1.7
 colorama==0.4.6
 Django==5.0.4
