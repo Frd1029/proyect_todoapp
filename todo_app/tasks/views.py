@@ -2,15 +2,18 @@ from django.shortcuts import render
 
 # Create your views here.
 from .models import Task, User
+from django.http import JsonResponse
+from django.core.serializers import serialize
 
 
 def tasks_list(request):
     tasks = Task.objects.all()
-    context = {"tasks": tasks}
-    return render(request, "tasks/index.html", context)
+    data = serialize('python', tasks)
+    return JsonResponse(data, safe=False)
+    
 
 
 def users_list(request):
     users = User.objects.all()
-    context = {"users": users}
-    return render(request, "users/index.html", context)
+    data = serialize('python', users)
+    return JsonResponse(data, safe=False)
