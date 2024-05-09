@@ -1,19 +1,14 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Task, User
+from .models import Task
 from django.http import JsonResponse
 from django.core.serializers import serialize
+from .serializers import TasksSerializer
+
+from rest_framework import viewsets
 
 
-def tasks_list(request):
-    tasks = Task.objects.all()
-    data = serialize('python', tasks)
-    return JsonResponse(data, safe=False)
-    
-
-
-def users_list(request):
-    users = User.objects.all()
-    data = serialize('python', users)
-    return JsonResponse(data, safe=False)
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TasksSerializer
