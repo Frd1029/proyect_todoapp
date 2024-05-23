@@ -1,9 +1,0 @@
-{% if tasks %}
-    <ul>
-        {% for task in tasks%}
-            <li>{{ task.id }} / <strong>{{ task.tittle }}</strong> : {{ task.description }}, {{ task.status }}, {{ task.deadline }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No tasks are avaliable</p>
-{% endif %}
