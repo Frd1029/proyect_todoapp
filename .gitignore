@@ -1,9 +1,14 @@
-#Archivos del entorno virtual
+#Virtual Environment / Dependency Directories
 venv/
+env/
+env32/
+.env/
 .python-version
 #Archivos de Python
 __pycache__/
 *.pyc
 *.pyo
-#Archivos de Configuración
-.env
+# Django Cache
+*.log
+logs/
+*.sqlite3
