@@ -21,6 +21,6 @@ class Task(models.Model):
         related_name="tasks",
         null=True,
     )
-    #completed = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.title
