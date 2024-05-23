@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 STATUS_OPTIONS = {
     "COMPLETED": "COMPLETED",
-    "PENDING": "PENDIENTE",
+    "PENDING": "PENDING",
     "DELAYED": "DELAYED",
 }
 
