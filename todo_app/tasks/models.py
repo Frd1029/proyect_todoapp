@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 STATUS_OPTIONS = {
     "COMPLETED": "COMPLETED",
@@ -16,7 +16,7 @@ class Task(models.Model):
     deadline = models.DateField()
     priority = models.PositiveSmallIntegerField(default=0);
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.RESTRICT,
         limit_choices_to={"is_superuser": False},
         related_name="tasks",
