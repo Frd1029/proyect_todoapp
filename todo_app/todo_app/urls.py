@@ -23,7 +23,7 @@ from rest_framework.authtoken import views
 from tasks.views import TaskViewSet
 
 router = routers.DefaultRouter()
-router.register('tasks', TaskViewSet)
+router.register(r'tasks', TaskViewSet)
 
 
 urlpatterns = [
