@@ -16,7 +16,7 @@ class TaskTests(APITestCase):
         cls.user = user_class.objects.create(username="john", email="foo@bar.com")
         cls.token = Token.objects.create(user=cls.user)
         cls.task = Task.objects.create(
-            name="My Task", description="My task description", user=cls.user
+            title="My Task", description="My task description", status= "DELAYED", deadline="2025-08-12",priority="2", user=cls.user
         )
 
     @classmethod
@@ -38,4 +38,4 @@ class TaskTests(APITestCase):
         url = reverse("task-detail", kwargs={"pk": self.task.id})
         response = self.client.get(url, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data.get("name"), self.task.name)
+        self.assertEqual(response.data.get("title"), self.task.title)
