@@ -6,7 +6,7 @@ class TasksSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = Task
-        fields = ["title", "description", "status", "priority"]
+        fields = ["title", "description", "status", "deadline", "priority"]
 
     def create(self, validated_data):
         validated_data['user'] =self.context['request'].user
