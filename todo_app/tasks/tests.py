@@ -48,3 +48,19 @@ class TaskTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         updated_task = Task.objects.get(pk=self.task.id)
         self.assertEqual(updated_task.status, "DELAYED")
+
+    def test_put_task(self):
+        data = {
+            "title": "My Task", 
+            "description": "My task description", 
+            "status": "DELAYED", 
+            "deadline": "2025-08-12", 
+            "priority": "1", 
+            "user": self.user.id
+        }
+        url = reverse("task-detail", kwargs={"pk": self.task.id})
+        response = self.client.put(url, data=json.dumps(data), content_type="application/json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        updated_task = Task.objects.get(pk=self.task.id)
+        self.assertEqual(updated_task.status, "DELAYED")
+        self.assertEqual(updated_task.priority, 1)
