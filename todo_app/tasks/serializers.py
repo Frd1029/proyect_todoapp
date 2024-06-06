@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Task
 
 
-class TasksSerializer(serializers.HyperlinkedModelSerializer):
+class TasksCreateSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = Task
@@ -10,7 +10,7 @@ class TasksSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         validated_data['user'] =self.context['request'].user
-        return super(TasksSerializer, self).create(validated_data)
+        return super(TasksCreateSerializer, self).create(validated_data)
 
 class TaskStatusUpdateSerializer(serializers.ModelSerializer):
     class Meta:
