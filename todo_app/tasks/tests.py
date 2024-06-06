@@ -39,3 +39,8 @@ class TaskTests(APITestCase):
         response = self.client.get(url, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data.get("title"), self.task.title)
+        
+    def test_get_task_delete(self):
+        url = reverse("task-detail", kwargs={"pk":self.task.id})
+        response = self.client.delete(url, format="json")
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
