@@ -2,9 +2,9 @@
 # Create your views here.
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
-
+from rest_framework.response import Response
 from .models import Task
-from .serializers import TasksCreateSerializer
+from .serializers import TasksCreateSerializer, TaskStatusUpdateSerializer
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -16,3 +16,10 @@ class TaskViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.tasks.all()
 
+    def partial_update(self, request, pk):
+        queryset = self.get_queryset()
+        task = queryset.get(pk=pk)
+        serializer = TaskStatusUpdateSerializer(data=request.data, instance=task, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
