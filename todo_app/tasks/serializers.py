@@ -21,3 +21,18 @@ class TaskStatusUpdateSerializer(serializers.ModelSerializer):
         instance.status = validated_data.get('status')
         instance.save()
         return instance
+
+class TaskDeleteSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+
+    def validate_id(self, value):
+        try:
+            task = Task.objects.get(pk=value)
+        except Task.DoesNotExist:
+            raise serializers.ValidationError("Task not found")
+        return value
+
+    def delete(self, validated_data):
+        task = Task.objects.get(pk=validated_data['id'])
+        task.delete()
+        return task
