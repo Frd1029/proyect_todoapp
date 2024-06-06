@@ -64,3 +64,8 @@ class TaskTests(APITestCase):
         updated_task = Task.objects.get(pk=self.task.id)
         self.assertEqual(updated_task.status, "DELAYED")
         self.assertEqual(updated_task.priority, 1)
+    
+    def test_delete_task(self):
+        url = reverse("task-detail", kwargs={"pk": self.task.id})
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
