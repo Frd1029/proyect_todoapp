@@ -1,3 +1,4 @@
+import json
 from django.test import TestCase
 
 # Create your tests here.
@@ -40,7 +41,15 @@ class TaskTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data.get("title"), self.task.title)
         
-    def test_get_task_delete(self):
+    def test_patch_task(self):
+        data = {"status": "En progreso"}
+        url = reverse("task-detail", kwargs={"pk": self.task.id})
+        response = self.client.patch(url, data=json.dumps(data), content_type="application/json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        updated_task = Task.objects.get(pk=self.task.id)
+        self.assertEqual(updated_task.status, "Terminado")
+
+    def test_delete_task(self):
         url = reverse("task-detail", kwargs={"pk":self.task.id})
         response = self.client.delete(url, format="json")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
