@@ -12,6 +12,20 @@ class TasksCreateSerializer(serializers.HyperlinkedModelSerializer):
         validated_data['user'] =self.context['request'].user
         return super(TasksCreateSerializer, self).create(validated_data)
 
+class TaskUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ["title", "description", "status", "deadline", "priority"]
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.status = validated_data.get('status', instance.status)
+        instance.deadline = validated_data.get('deadline', instance.deadline)
+        instance.priority = validated_data.get('priority', instance.priority)
+        instance.save()
+        return instance
+
 class TaskStatusUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
