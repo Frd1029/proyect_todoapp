@@ -25,11 +25,11 @@ class TaskViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response(serializer.data)
             
-    def destroy(self, request, pk=None):
-        serializer = TaskDeleteSerializer(data={'id': pk})
-        serializer.is_valid(raise_exception=True)
+    def destroy(self, pk=None):
         queryset = self.get_queryset()
         task = queryset.get(pk=pk)
+        serializer = TaskDeleteSerializer(data={'id': pk})
+        serializer.is_valid(raise_exception=True)
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
         
