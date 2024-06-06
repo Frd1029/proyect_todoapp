@@ -25,7 +25,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response(serializer.data)
             
-    def destroy(self, pk=None):
+    def destroy(self, request, pk=None):
         queryset = self.get_queryset()
         task = queryset.get(pk=pk)
         serializer = TaskDeleteSerializer(data={'id': pk})
