@@ -40,7 +40,20 @@ class TaskTests(APITestCase):
         response = self.client.get(url, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data.get("title"), self.task.title)
-        
+    
+    def test_post_task(self):
+        url = reverse("task-list")
+        data = {
+            "title": "New Task",
+            "description": "Description of the new task",
+            "status": "PENDING",
+            "deadline": "2024-06-15",
+            "priority": "1"
+        }
+        response = self.client.post(url, data=json.dumps(data), content_type="application/json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(Task.objects.filter(title="New Task").exists())
+       
     def test_patch_task(self):
         data = {"status": "DELAYED"}
         url = reverse("task-detail", kwargs={"pk": self.task.id})
