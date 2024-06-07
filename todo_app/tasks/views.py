@@ -30,3 +30,9 @@ class TaskViewSet(viewsets.ModelViewSet):
         pending_tasks = self.get_queryset().filter(status="PENDING")
         serializer = self.get_serializer(pending_tasks, many=True)
         return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def order_tasks_priority(self, request):
+        order_tasks_priority = self.get_queryset().order_by("-priority")
+        serializer = self.get_serializer(order_tasks_priority, many=True)
+        return Response(serializer.data)
