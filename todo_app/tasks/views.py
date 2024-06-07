@@ -24,3 +24,9 @@ class TaskViewSet(viewsets.ModelViewSet):
         completed_tasks = self.get_queryset().filter(status="COMPLETED")
         serializer = self.get_serializer(completed_tasks, many=True)
         return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def pending_tasks(self, request):
+        pending_tasks = self.get_queryset().filter(status="PENDING")
+        serializer = self.get_serializer(pending_tasks, many=True)
+        return Response(serializer.data)
