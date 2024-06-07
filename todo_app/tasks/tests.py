@@ -1,5 +1,3 @@
-from django.test import TestCase
-
 # Create your tests here.
 from django.urls import reverse
 from rest_framework import status
@@ -16,7 +14,12 @@ class TaskTests(APITestCase):
         cls.user = user_class.objects.create(username="john", email="foo@bar.com")
         cls.token = Token.objects.create(user=cls.user)
         cls.task = Task.objects.create(
-            title="My Task", description="My task description", status= "DELAYED", deadline="2025-08-12",priority="2", user=cls.user
+            title="My Task",
+            description="My task description",
+            status="DELAYED",
+            deadline="2025-08-12",
+            priority="2",
+            user=cls.user,
         )
 
     @classmethod

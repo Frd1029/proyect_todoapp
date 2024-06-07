@@ -1,4 +1,3 @@
-
 # Create your views here.
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter
@@ -15,4 +14,3 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.tasks.all()
-

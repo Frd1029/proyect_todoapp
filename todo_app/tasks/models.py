@@ -7,6 +7,7 @@ STATUS_OPTIONS = {
     "DELAYED": "DELAYED",
 }
 
+
 # Create your models here.
 class Task(models.Model):
 
@@ -14,7 +15,7 @@ class Task(models.Model):
     description = models.TextField()
     status = models.CharField(max_length=10, choices=STATUS_OPTIONS, default="PENDING")
     deadline = models.DateField()
-    priority = models.PositiveSmallIntegerField(default=0);
+    priority = models.PositiveSmallIntegerField(default=0)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.RESTRICT,
@@ -22,6 +23,6 @@ class Task(models.Model):
         related_name="tasks",
         null=True,
     )
-    
+
     def __str__(self):
         return self.title
