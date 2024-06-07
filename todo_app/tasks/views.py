@@ -1,6 +1,8 @@
 
 # Create your views here.
 from rest_framework import viewsets
+from rest_framework.decorators import action  # To filter completeds
+from rest_framework.response import Response
 from rest_framework.filters import OrderingFilter
 
 from .models import Task
@@ -16,3 +18,9 @@ class TaskViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.tasks.all()
 
+# Modification to filter by completed
+    @action(detail=False, methods=['get'])
+    def completed_tasks(self, request):
+        completed_tasks = self.get_queryset().filter(status="COMPLETED")
+        serializer = self.get_serializer(completed_tasks, many=True)
+        return Response(serializer.data)
