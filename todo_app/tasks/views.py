@@ -1,4 +1,3 @@
-
 # Create your views here.
 from rest_framework import viewsets
 from rest_framework import status
@@ -16,7 +15,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.tasks.all()
-
+      
     def update(self, request, pk):
         queryset = self.get_queryset()
         task = queryset.get(pk=pk)
@@ -40,4 +39,3 @@ class TaskViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-        
